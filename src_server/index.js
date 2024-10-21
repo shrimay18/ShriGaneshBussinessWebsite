@@ -53,6 +53,40 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
+
+app.post('/api/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Find the user by email
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            // If user doesn't exist
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        // Check if password matches (assuming the passwords are hashed in the database)
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            // If password doesn't match
+            return res.status(400).json({ success: false, message: 'Invalid credentials' });
+        }
+
+        // If login is successful
+        res.status(200).json({
+            success: true,
+            message: 'Login successful',
+            token: 'your-jwt-token', // You can generate and send a JWT token here
+        });
+    } catch (err) {
+        // Handle any errors
+        console.error(err.message);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
