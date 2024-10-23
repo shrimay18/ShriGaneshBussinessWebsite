@@ -1,0 +1,24 @@
+.product-container{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    width:100vw;
+}
+
+.product-search{
+    margin:1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-search input{
+    border-radius: 20px;
+    font-size: 1.2rem;
+}
+
+.product-list{
+    display: flex;
+    /* margin:1rem; */
+}
+

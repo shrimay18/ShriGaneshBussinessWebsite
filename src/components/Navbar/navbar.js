@@ -51,7 +51,7 @@ function Navbar({ isLoggedIn, handleLogout, userName }) {
                 <div className='nav subscription' onClick={() => navigate('/subscription')}>Subscription</div>
                 <div className='nav Login'>
                     {isLoggedIn ? (
-                        <div>{userName} <span onClick={handleLogout}>(Logout)</span></div>
+                        <div>Logout</div>
                     ) : location.pathname === '/' ? (
                         <div onClick={handleLogin}>Login</div>
                     ) : location.pathname === '/login' ? (
