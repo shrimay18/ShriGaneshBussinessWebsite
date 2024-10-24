@@ -1,9 +1,10 @@
 .product-container{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     /* justify-content: center; */
     /* align-items: center; */
-    width:100vw;
+    /* width:100vw; */
 }
 
 .product-search{
@@ -19,6 +20,35 @@
 
 .product-list{
     display: flex;
+    width: 100vw;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     /* margin:1rem; */
 }
 
+.add-to-cart-button{
+    margin-right: 1rem;
+    width:10vw;
+    background-color: rgb(242, 122, 79);
+    border:none;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+@media screen and (max-width: 850px){
+    .add-to-cart-button{
+        width:20vw;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .add-to-cart-button{
+        width:30vw;
+    }
+    .product-search input{
+        width: 50vw;
+    }
+}
+    
