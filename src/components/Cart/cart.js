@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 import Navbar from '../Navbar/navbar';
+import './cart.css';
 
 function Cart() {
     const { cart } = useContext(CartContext);
@@ -12,9 +13,10 @@ function Cart() {
             {cart.length === 0 ? (
                 <p>Your cart is empty</p>
             ) : (
-                <div>
+                <div className='cart-items'>
                     {cart.map(item => (
                         <div key={item.id} className='cart-item'>
+                            <img src={item.image} alt='product' />
                             <div>{item.name}</div>
                             <div>Quantity: {item.quantity}</div>
                             <div>Price: ₹{item.price * item.quantity}</div>
