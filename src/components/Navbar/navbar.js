@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-function Navbar({ isLoggedIn, handleLogout, userName }) {
+function Navbar({ isLoggedIn,userName }) {
     const [hamburger, setHamburger] = useState(false);
     const menuRef = useRef(null);
     const navigate = useNavigate();
@@ -25,6 +25,11 @@ function Navbar({ isLoggedIn, handleLogout, userName }) {
         navigate('/login');
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('token'); // Clear the token
+        navigate('/login'); // Redirect to login page
+    };
+    
     const handleSignup = () => {
         navigate('/');
     };

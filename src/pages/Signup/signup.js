@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './signup.css';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/navbar.js';
 import axios from 'axios';
 
@@ -10,23 +9,22 @@ function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [contact, setContact] = useState('');
+    const [error, setError] = useState('');
 
-    const navigate = useNavigate(); // Initialize navigate
-    
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const userData = {
-            name,
-            email,
-            password,
-            contact,
-        };
-        console.log('User Data:', userData); // Check the data before sending
+        const userData = { name, email, password, contact };
+        
         try {
             const response = await axios.post('http://localhost:2525/api/signup', userData);
-            navigate('/home');
+            
+            // Handle successful signup and redirect to products or login page
+            localStorage.setItem('token', response.data.token); // Save token if needed
+            navigate('/products'); // Navigate to products page
         } catch (error) {
-            alert('Error: ' + error.response.data);
+            setError(error.response?.data || 'Signup failed. Please try again.');
         }
     };
 
@@ -37,25 +35,15 @@ function Signup() {
                 <div className='signup-container'>
                     <div className='signup-heading'>SignUp</div>
                     <div className='signup-form'>
-                        <div className='suf name'>
-                            <input type='text' placeholder='Name' onChange={(e) => setName(e.target.value)} required/>
-                        </div>
-                        <div className='suf email'>
-                            <input type='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} required/>
-                        </div>
-                        <div className='suf password'>
-                            <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required/>
-                        </div>
-                        <div className='suf confirm-password'>
-                            <input type='password' placeholder='Confirm Password' />
-                        </div>
-                        <div className='suf contact'>
-                            <input type='number' placeholder='Contact number' onChange={(e) => setContact(e.target.value)} required/>
-                        </div>
+                        <input type='text' placeholder='Name' onChange={(e) => setName(e.target.value)} required/>
+                        <input type='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} required/>
+                        <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required/>
+                        <input type='number' placeholder='Contact number' onChange={(e) => setContact(e.target.value)} required/>
                     </div>
-                <button type='submit' className='signup-button'>SignUp</button>
+                    <button type='submit' className='signup-button'>SignUp</button>
                 </div>
             </div>
+            {error && <div className='signup-error'>{error}</div>}
         </form>
     );
 }
