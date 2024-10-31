@@ -47,8 +47,10 @@ function CustomerModal({ onClose, onAddCustomer }) {
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value)}
                 />
-                <button onClick={handleAddCustomer}>Add Customer</button>
-                <button onClick={onClose}>Close</button>
+                <div className='modal-buttons'>
+                    <button onClick={handleAddCustomer}>Add Customer</button>
+                    <button onClick={onClose} className='close-button-modal'>Close</button>
+                </div>
             </div>
         </div>
     );
