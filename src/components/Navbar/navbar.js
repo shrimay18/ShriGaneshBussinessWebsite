@@ -52,11 +52,11 @@ function Navbar({ isLoggedIn,userName }) {
                 <div className='nav Home' onClick={() => navigate('/')}>Home</div>
                 <div className='nav About' onClick={() => navigate('/about')}>About</div>
                 <div className='nav Contact' onClick={() => navigate('/contact')}>Contact</div>
-                <div className='nav Products' onClick={() => navigate('/products')}>Products</div>
+                <div className='nav Customers' onClick={() => navigate('/customers')}>Products</div>
                 <div className='nav subscription' onClick={() => navigate('/subscription')}>Subscription</div>
                 <div className='nav Login'>
                     {isLoggedIn ? (
-                        <div>Logout</div>
+                        <div onClick={handleLogout}>Logout</div>
                     ) : location.pathname === '/' ? (
                         <div onClick={handleLogin}>Login</div>
                     ) : location.pathname === '/login' ? (

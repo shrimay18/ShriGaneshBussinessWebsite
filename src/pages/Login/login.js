@@ -11,7 +11,7 @@ function Login() {
 
     // Check if the user is already logged in
     useEffect(() => {
-        const token = localStorage.getItem('token'); // Or any flag like 'isLoggedIn'
+        const token = localStorage.getItem('token'); 
         if (token) {
             navigate('/products'); // Redirect to products if already logged in
         }
@@ -20,7 +20,7 @@ function Login() {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:2525/api/login', { 
+            const response = await fetch('http://localhost:2525/api/auth/login', { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,8 +31,8 @@ function Login() {
             const data = await response.json();
     
             if (response.ok && data.success) {
-                // Save token to localStorage
-                localStorage.setItem('token', data.token); // Replace 'data.token' with whatever token or flag you receive
+                localStorage.setItem('token', data.token); // Save JWT token
+                localStorage.setItem('userId', data.userId); // Store user ID in localStorage
                 navigate('/products'); // Redirect to products page after login
             } else {
                 setError(data.message || 'Login failed. Please try again.');
@@ -40,7 +40,7 @@ function Login() {
         } catch (error) {
             setError('Failed to connect to server. Please try again');
         }
-    };
+    };    
     
     return (
         <form className='login' onSubmit={handleLoginSubmit}>

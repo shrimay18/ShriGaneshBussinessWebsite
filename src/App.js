@@ -6,6 +6,7 @@ import './index.css';
 import Product from './pages/Product/product.js';
 import Signup from './pages/Signup/signup.js';
 import Cart from './components/Cart/cart.js';
+import Customers from './pages/Customers/customers.js';
 import { CartProvider } from './context/CartContext';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path='/login' element={<Login/>} />
             <Route path='/products' element={<Product/>} />
             <Route path='/cart' element={<Cart/>} />
+            <Route path='/customers' element={<Customers/>} />
           </Routes>
         </div>
       </CartProvider>
